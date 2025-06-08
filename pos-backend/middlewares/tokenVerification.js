@@ -31,4 +31,18 @@ const isVerifiedUser = async (req, res, next) => {
     }
 }
 
-module.exports = { isVerifiedUser };
+// Middleware to check if user has Admin role
+const isAdmin = async (req, res, next) => {
+    try {
+        if (req.user && req.user.role === "Admin") {
+            next();
+        } else {
+            const error = createHttpError(403, "Access denied. Admin role required.");
+            return next(error);
+        }
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports = { isVerifiedUser, isAdmin };
