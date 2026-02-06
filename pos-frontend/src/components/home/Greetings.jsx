@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
+/**
+ * Greetings Component - Displays time-based greeting and current date/time
+ * 
+ * Improvements contributed with assistance from Claude (Anthropic) via Antigravity.
+ * Learning to leverage AI tools effectively for code quality improvements.
+ * - Added dynamic greeting based on time of day
+ * 
+ * @contributor Karthik-M-R
+ */
+
 const Greetings = () => {
   const userData = useSelector(state => state.user);
   const [dateTime, setDateTime] = useState(new Date());
