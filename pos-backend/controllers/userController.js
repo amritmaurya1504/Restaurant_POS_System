@@ -7,9 +7,9 @@ const config = require("../config/config");
 const register = async (req, res, next) => {
     try {
 
-        const { name, phone, email, password, role } = req.body;
+        const { name, phone, email, password } = req.body;
 
-        if(!name || !phone || !email || !password || !role){
+        if(!name || !phone || !email || !password){
             const error = createHttpError(400, "All fields are required!");
             return next(error);
         }
@@ -21,7 +21,8 @@ const register = async (req, res, next) => {
         }
 
 
-        const user = { name, phone, email, password, role };
+        // Role is assigned server side to prevent privilege escalation via self-registration.
+        const user = { name, phone, email, password, role: "Waiter" };
         const newUser = User(user);
         await newUser.save();
 
